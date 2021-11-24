@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+function _zgenom_release() {
+	_values -w options '--name[provide a name instead of using a hash]'
+}
+
+_zgenom_release $@

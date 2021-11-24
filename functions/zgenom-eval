@@ -1,0 +1,26 @@
+#!/usr/bin/env zsh
+
+function zgenom-eval() {
+	local dir temp name
+	zparseopts -D -E -name:=name || return
+
+	temp=$(mktemp)
+
+	if [[ $# -eq 0 ]]; then
+		# heredoc
+		setopt errreturn
+		tee "$temp" >/dev/null
+	else
+		echo $@ >$temp
+	fi
+
+	name=${name[2]:-$(sha1sum "$temp" | cut -c 1-7)}
+
+	repo="zgenom_eval/$name"
+	dir=$(zgenom api clone_dir $repo)
+	if [[ ! -e $dir ]] mkdir -p $dir
+	mv "$temp" "$dir"/init.zsh
+	zgenom load $repo
+}
+
+zgenom-eval $@
