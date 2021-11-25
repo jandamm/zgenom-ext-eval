@@ -1,10 +1,13 @@
 # Zgenom Extension for creating plugins inline
 
-- Add plugin configuration right next to loading the plugins.
-- Generate plugins by evaluating commands (e.g. zoxide init script)
-
-Thanks to [zoritle](https://github.com/zoritle) for the idea and [initial
+Big thanks to [zoritle](https://github.com/zoritle) for the idea and [initial
 implementation](https://github.com/jandamm/zgenom/issues/84#issuecomment-966037290).
+
+- Add plugin configuration right next to loading the plugins.
+- Generate plugins by evaluating commands (e.g. zoxide init script) and have a
+  faster startup time
+
+You need to use it with [zgenom](https://github.com/jandamm/zgenom).
 
 ## Example
 
@@ -33,8 +36,10 @@ if ! zgenom saved; then
 fi
 ```
 
-**Note:** Since this does not clone a git repository the release is not updated
-when `zgenom update` is executed.
+**Note:** Since this does not clone a git repository the script is not updated
+when `zgenom update` is executed. It is updated when a new shell is started
+where `init.zsh` is missing. This shouldn't be an issue using
+`zgenom autoupdate --background`.
 
 ## Options
 
